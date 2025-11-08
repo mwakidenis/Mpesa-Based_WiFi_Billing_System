@@ -17,16 +17,42 @@ router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    if (
+    // Check primary admin credentials
+    const isPrimaryAdmin = (
       username === process.env.ADMIN_USERNAME &&
       password === process.env.ADMIN_PASSWORD
-    ) {
+    );
+
+    // Check secondary admin credentials
+    const isSecondaryAdmin = (
+      username === process.env.ADMIN_USERNAME_2 &&
+      password === process.env.ADMIN_PASSWORD_2
+    );
+
+    if (isPrimaryAdmin) {
       const token = jwt.sign(
         { role: "admin", username, email: process.env.ADMIN_EMAIL },
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
       );
-      return res.json({ success: true, token, admin: { username, email: process.env.ADMIN_EMAIL } });
+      return res.json({
+        success: true,
+        token,
+        admin: { username, email: process.env.ADMIN_EMAIL }
+      });
+    }
+
+    if (isSecondaryAdmin) {
+      const token = jwt.sign(
+        { role: "admin", username, email: process.env.ADMIN_EMAIL_2 },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+      );
+      return res.json({
+        success: true,
+        token,
+        admin: { username, email: process.env.ADMIN_EMAIL_2 }
+      });
     }
 
     return res.status(401).json({ success: false, message: "Invalid credentials" });
