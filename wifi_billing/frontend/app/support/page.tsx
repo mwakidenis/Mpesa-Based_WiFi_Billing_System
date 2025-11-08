@@ -169,8 +169,6 @@ export default function SupportPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [user, setUser] = useState<any>(null)
   const [wsConnected, setWsConnected] = useState(false)
-  const [viewRequestsPhone, setViewRequestsPhone] = useState("")
-  const [showRequestViewer, setShowRequestViewer] = useState(false)
 
   // Check authentication and load user requests
   useEffect(() => {
@@ -195,10 +193,6 @@ export default function SupportPage() {
         if (user?.phone) {
           loadUserRequests(user.phone)
         }
-        // Also refresh the viewer if it's showing the same phone
-        if (showRequestViewer && viewRequestsPhone && viewRequestsPhone === user?.phone) {
-          loadUserRequests(viewRequestsPhone)
-        }
       }
     }
 
@@ -213,7 +207,7 @@ export default function SupportPage() {
       window.removeEventListener("support_request_update", handleWsMessage as EventListener)
       window.removeEventListener("websocket_connected", handleWsConnection as EventListener)
     }
-  }, [user?.phone, showRequestViewer, viewRequestsPhone])
+  }, [user?.phone])
 
   // Auto-refresh user requests every 5 seconds when authenticated (fallback)
   useEffect(() => {
@@ -460,52 +454,6 @@ export default function SupportPage() {
             </Card>
           </div>
 
-          {/* User Support Requests - Show for authenticated users */}
-          {isAuthenticated && (
-            <div className="max-w-4xl mx-auto mb-16">
-              <Card className="bg-white/50 dark:bg-slate-800/50 border-slate-200 dark:border-white/10">
-                <CardHeader>
-                  <CardTitle className="text-slate-900 dark:text-white">
-                    Your Support Requests ({userRequests.length})
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {userRequests.length > 0 ? (
-                    <div className="space-y-4">
-                      {userRequests
-                        .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-                        .map((request: any) => (
-                        <div key={request.id} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600 hover:shadow-md transition-shadow">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h4 className="font-medium text-slate-900 dark:text-white">{request.name}</h4>
-                              {getStatusBadge(request.status)}
-                            </div>
-                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">{request.message}</p>
-                            <p className="text-xs text-slate-500 dark:text-slate-500">
-                              Transaction: {request.transactionCode} • {new Date(request.createdAt).toLocaleDateString()} • {new Date(request.createdAt).toLocaleTimeString()}
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-xs text-slate-400 dark:text-slate-500">ID: {request.id}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <p className="text-slate-600 dark:text-slate-400 mb-2">
-                        You haven't submitted any support requests yet.
-                      </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-500">
-                        Submit a request below and it will appear here with real-time status updates.
-                      </p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          )}
 
           {/* Contact Form - Moved to Top */}
           <div className="max-w-2xl mx-auto mb-16" id="contact">
