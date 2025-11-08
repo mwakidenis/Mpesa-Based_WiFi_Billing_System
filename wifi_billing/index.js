@@ -246,6 +246,7 @@ app.get("/", (req, res) => {
 // -------------------- START SERVER --------------------
 
 // -------------------- START SERVER --------------------
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`WebSocket server ready for real-time updates`);
 });
