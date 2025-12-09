@@ -1,6 +1,6 @@
 # M-Pesa Based WiFi Billing System
 
-A comprehensive WiFi billing system that enables users to purchase internet access via M-Pesa STK Push payments. Designed for cybercafés, small businesses, and public WiFi hotspots, this system integrates with MikroTik routers for secure MAC address-based access control.
+A comprehensive WiFi billing system that enables users to purchase internet access via M-Pesa STK Push payments. Designed for cybercafés, small businesses, and public Wifi hotspots, this system integrates with MikroTik routers for secure MAC address-based access control.
 
 ## Features
 
