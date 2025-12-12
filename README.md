@@ -1,319 +1,199 @@
-# 🎓 Mwaki Denis EduFreeKit
+# M-Pesa Based WiFi Billing System
 
-Open Source African Tech Learning Platform
+[![Node.js](https://img.shields.io/badge/Node.js-16+-green)](https://nodejs.org/) 
+[![MySQL](https://img.shields.io/badge/MySQL-8+-blue)](https://www.mysql.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-13-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-brightgreen)](https://anotherone-production-dcdb.up.railway.app/)
 
-MIT License · PRs Welcome · TypeScript · React · Vite · Supabase
-
-🌐 Live Demo · 🐛 Report Bug · 💡 Request Feature · 🤝 Join Discord
-
----
-
-## 📖 Table of Contents
-- [About the Project](#about-the-project)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [System Architecture](#system-architecture)
-- [Getting Started](#getting-started)
-- [Database Schema & ERD](#database-schema--erd)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Priority Areas](#priority-areas)
-- [Recognition](#recognition)
-- [Questions](#questions)
-- [Code of Conduct](#code-of-conduct)
-- [Security](#security)
-- [License](#license)
-- [Contact & Community](#contact--community)
-- [Acknowledgments](#acknowledgments)
-- [Roadmap](#roadmap)
-- [Good First Issues](#good-first-issues)
-- [Support the Project](#support-the-project)
+A comprehensive WiFi billing system that allows users to purchase internet access via **M-Pesa STK Push payments**. Perfect for cybercafés, small businesses, and public WiFi hotspots, with MikroTik integration for secure MAC-based access control.
 
 ---
 
-## 🌍 About the Project
-**EduFreeKit** is an open-source platform dedicated to curating and sharing high-quality tech learning resources. Built by African developers for learners worldwide, it ensures education is **free, accessible, and community-driven**.
+## 🌟 Features
 
-**🎯 Our Mission**
-- Curate high-quality learning resources in multiple tech domains.
-- Empower African developers and learners through open-source education.
-- Showcase contributions from African developers and educators.
-- Provide a platform for learners globally to access free tech education.
-
----
-
-## 🔄 User Journey Flow
-*Diagram pending (ERD included below in Database Schema section)*
+- **M-Pesa Integration**: STK Push payments directly from user phones  
+- **Time-Based Access**: Flexible internet access packages  
+- **Admin Dashboard**: Manage payments, users, and system settings  
+- **MAC Address Whitelisting**: Automatic router integration  
+- **Real-Time Monitoring**: Track sessions, payments, and system status  
+- **Responsive Frontend**: React-based UI with dark/light themes  
+- **Database Management**: Prisma ORM with MySQL  
 
 ---
 
-## ✨ Features
-### Core Functionality
-- 🔐 **User Authentication**: Secure email/password authentication.
-- 📝 **Resource Contribution**: Authenticated users submit learning resources.
-- ⭐ **Ratings & Reviews**: Rate resources 1–5 stars with comments.
-- 🔍 **Advanced Search & Filtering**: Search by title, tags; filter by category/difficulty.
-- 🔄 **Smart Sorting**: Sort resources by newest, oldest, popularity, rating.
-- 📊 **Category Organization**: 8 tech categories with dedicated pages.
-- 👤 **User Profiles**: Auto profile creation with avatar support.
-- 📱 **Responsive Design**: Mobile-first, beautiful UI.
-- 📖 **Bookmarks System**: Save favorite resources.
-- 📊 **User Dashboard**: Track contributions, bookmarks, statistics.
-- 💾 **Export Bookmarks**: Export as JSON, CSV, or Markdown.
-- ♿ **Accessibility**: ARIA labels, skip links, keyboard navigation.
-- 👁️ **View Tracking**: See how many times resources were accessed.
+## 🛠 Tech Stack
 
-### Categories Covered
-- Computer Science
-- Web Development
-- Cloud Computing
-- Blockchain & Web3
-- AI/ML & Data Science
-- Mobile Development
-- DevOps
-- Cybersecurity
+- **Backend**: Node.js, Express.js, Prisma ORM  
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS  
+- **Database**: MySQL  
+- **Router Integration**: MikroTik API  
+- **Payment Gateway**: M-Pesa Daraja API  
+- **Authentication**: JWT + bcrypt  
 
 ---
 
-## 🛠️ Tech Stack
-### Frontend
-- React 18
-- TypeScript
-- Vite
-- Tailwind CSS
-- shadcn/ui
-- React Router
-- TanStack Query
-- Sonner
+## 🚀 Live Demo
 
-### Backend (Supabase)
-- PostgreSQL
-- Supabase Auth
-- Row Level Security (RLS)
-- Supabase Realtime
-
-### Developer Tools
-- ESLint
-- TypeScript ESLint
-- Lucide React
+Check it out online: [https://anotherone-production-dcdb.up.railway.app/](https://anotherone-production-dcdb.up.railway.app/)
 
 ---
 
-## 🏗️ System Architecture
-![ERD](./erd.png)
-> The ERD illustrates the database structure including `profiles`, `resources`, `ratings`, `bookmarks`, and `resource_views`.
+## 💻 Prerequisites
+
+- Node.js (v16+)  
+- npm  
+- MySQL Server (v8+)  
+- Python 3.x (for hotspot server)  
+
+### M-Pesa Setup
+
+1. Register at [Safaricom Developer Portal](https://developer.safaricom.co.ke/)  
+2. Obtain: Consumer Key, Consumer Secret, Passkey, Shortcode  
+
+### MikroTik Router (Optional)
+
+- RouterOS 6.x+ with API access enabled  
+- Username/password credentials  
 
 ---
 
-## 🚀 Getting Started
-### Prerequisites
-- Node.js v18+
-- npm / yarn / bun
-- Git
+## ⚡ Installation & Setup
 
-### Installation
+### 1. Clone Repository
 ```bash
-git clone https://github.com/mwakidenis/mwakidenis.git
-cd mwakidenis
-npm install # or yarn install / bun install
-Environment Variables
-Create a .env in root:
-
-ini
-Copy code
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_PUBLISHABLE_KEY=your_anon_key
-VITE_SUPABASE_PROJECT_ID=your_project_id
-Run Dev Server
+git clone https://github.com/Nigiddy/Mpesa_Based-WiFi-Billing-System.git
+cd Mpesa_Based-WiFi-Billing-System
+2. Install Dependencies
 bash
 Copy code
+npm install
+cd frontend
+npm install
+cd ..
+3. Configure Database
+Create MySQL database wifi_billing
+
+Add .env file with credentials:
+
+env
+Copy code
+# M-Pesa
+MPESA_CONSUMER_KEY=your_key
+MPESA_CONSUMER_SECRET=your_secret
+MPESA_PASSKEY=your_passkey
+MPESA_SHORTCODE=your_shortcode
+MPESA_CALLBACK_URL=http://localhost:5000/api/mpesa/callback
+
+# Database
+DATABASE_URL="mysql://username:password@localhost:3306/wifi_billing"
+
+# JWT
+JWT_SECRET=your_jwt_secret
+
+# Admin
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=your_admin_password
+
+# Server
+PORT=5000
+
+# MikroTik (optional)
+MIKROTIK_HOST=router_ip
+MIKROTIK_USERNAME=username
+MIKROTIK_PASSWORD=password
+4. Database Migration
+bash
+Copy code
+npx prisma migrate dev --name init
+npx prisma generate
+5. Create Admin User
+bash
+Copy code
+node scripts/addAdmin.js
+🏃 Running the Application
+Backend
+bash
+Copy code
+npm start
+Backend: http://localhost:5000
+
+Frontend
+bash
+Copy code
+cd frontend
 npm run dev
-App will be at http://localhost:8080.
+Frontend: http://localhost:3000
 
-🗄️ Database Schema & ERD
-Tables
-profiles
+Hotspot Login Server
+bash
+Copy code
+python -m http.server 8080 --directory hotspot
+Login page: http://localhost:8080/login.html
 
-id: UUID PK
+👥 Usage
+Users
+Connect to WiFi
 
-username: TEXT, unique
+Open browser → redirected to login
 
-avatar_url: TEXT
+Select package & enter phone number
 
-created_at: TIMESTAMPTZ
+Complete M-Pesa STK Push
 
-resources
+Access granted automatically
 
-id: UUID PK
+Admins
+Login at http://localhost:3000/admin/login
 
-title: TEXT
+Manage payments, users, and system status
 
-description: TEXT
+🔗 API Endpoints
+Payment
 
-link: TEXT
+POST /api/pay - Initiate payment
 
-category: TEXT
+POST /api/mpesa/callback - M-Pesa callback
 
-difficulty: TEXT
+Admin
 
-tags: TEXT[]
+POST /api/admin/login - Admin login
 
-contributor_id: UUID FK -> profiles.id
+GET /api/admin/payments - List payments
 
-view_count: INTEGER
+GET /api/admin/users - List users
 
-created_at: TIMESTAMPTZ
+User
 
-ratings
+GET /api/packages - List packages
 
-id: UUID PK
-
-resource_id: UUID FK -> resources.id
-
-user_id: UUID FK -> profiles.id
-
-rating: INTEGER (1-5)
-
-comment: TEXT
-
-created_at: TIMESTAMPTZ
-
-bookmarks
-
-id: UUID PK
-
-user_id: UUID FK -> profiles.id
-
-resource_id: UUID FK -> resources.id
-
-created_at: TIMESTAMPTZ
-
-resource_views
-
-id: UUID PK
-
-resource_id: UUID FK -> resources.id
-
-user_id: UUID FK -> profiles.id (nullable)
-
-viewed_at: TIMESTAMPTZ
-
-💻 Usage
-For Learners
-
-Browse tracks
-
-Search, filter, and sort
-
-Sign up to rate, review, bookmark, export bookmarks
-
-For Contributors
-
-Sign up
-
-Contribute learning resources, free certificates, YouTube content
-
-Review and rate resources
+GET /api/user/status - Access status
 
 🤝 Contributing
-We welcome developers, designers, educators!
+Fork the repo
 
-Ways to Contribute
-📚 Share resources
+Create branch: git checkout -b feature-name
 
-💻 Contribute code
+Make changes & test
 
-🎨 UI/UX Design
+Commit: git commit -am 'Add feature'
 
-📖 Documentation
+Push: git push origin feature-name
 
-🧪 Testing & Feedback
+Open Pull Request
 
-Contribution Workflow
-bash
+⚖ License
+MIT License – see LICENSE for details.
+
+💌 Support
+Email: mwakidenice@gmail.com
+
+WhatsApp: Chat
+
+
+
+Made with ❤️ in Africa for the World 🌍
+
+yaml
 Copy code
-git clone https://github.com/mwakidenis/mwakidenis.git
-git checkout -b feature/amazing-feature
-# make changes, test, commit
-git push origin feature/amazing-feature
-🎯 Priority Areas
-Area	Difficulty	Impact
-Advanced Search	Medium	High
-Analytics Dashboard	Medium-Hard	High
-Learning Paths	Medium	High
-Accessibility	Easy-Medium	High
-Mobile App	Hard	High
-
-🏆 Recognition
-Contributors page
-
-Monthly highlights
-
-Special badges
-
-❓ Questions?
-💬 Discussions
-
-📧 Email: contribute@mwakidenis.com
-
-🐛 Report issues
-
-💡 Suggest features
-
-📜 Code of Conduct
-✅ Be respectful and inclusive
-
-❌ No harassment or trolling
-Violations? Email: contribute@mwakidenis.com
-
-🔒 Security
-Report vulnerabilities responsibly: security@mwakidenis.com
-
-📄 License
-MIT License. See LICENSE.
-
-📞 Contact & Community
-Platform	Link	Purpose
-💻 GitHub	Repo	Code, PRs, Issues
-💬 Discord	Join Server	Real-time chat
-📧 Email	contribute@mwakidenis.com	General inquiries
-
-🙏 Acknowledgments
-Supabase, shadcn/ui, Lucide, Tailwind CSS
-
-Open Source Community
-
-Contributors
-
-🗺️ Roadmap
-Q1 2025: Advanced search with AI suggestions
-
-Q1 2025: Analytics dashboard
-
-Q2 2025: Multi-language support
-
-Q2 2025: Native mobile app
-
-Q2 2025: Guided learning paths & certifications
-
-🎯 Good First Issues
-Documentation fixes
-
-UI improvements
-
-Accessibility
-
-Bug fixes
-
-Testing
-
-💖 Support the Project
-⭐ Star repo
-
-🍴 Fork
-
-💬 Join discussions
-
-📢 Share
-
-Made with ❤️ in Africa for the world 🌍
