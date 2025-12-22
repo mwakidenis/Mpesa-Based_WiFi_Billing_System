@@ -15,7 +15,7 @@
 - [x] Update dashboard and admin pages with loan features
 
 ## Testing & Verification
-- [x] Implement bypass mode for testing with one user
+- [x] Implement bypass mode for testing with one user 
 - [x] Run Prisma migrations after schema update
 - [x] Test loan eligibility logic with sample data
 - [x] Verify Socket.IO realtime updates
