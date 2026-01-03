@@ -1,28 +1,38 @@
 {
-  "name": "Denis K.",
+  "name": "wifi-billing-api",
   "version": "1.0.0",
+  "private": true,
   "main": "server.js",
+  "description": "WiFi billing system with Express, Prisma, and Next.js frontend",
+  "author": "Denis K.",
+  "license": "ISC",
+
+  "engines": {
+    "node": ">=18 <=22"
+  },
+
   "scripts": {
-    "dev": "next dev frontend",
-    "build": "cd frontend && npm run build",
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm install && npm run build",
     "start": "NODE_ENV=production node server.js",
+
     "postinstall": "npx prisma generate",
-    "deploy:railway": "npm install && npm run build && railway up"
+
+    "deploy:railway": "npm install && npm run build && railway up",
+
     "pm2:start": "pm2 start ecosystem.config.js",
     "pm2:stop": "pm2 stop ecosystem.config.js",
     "pm2:restart": "pm2 restart ecosystem.config.js",
     "pm2:delete": "pm2 delete ecosystem.config.js",
     "pm2:logs": "pm2 logs wifi-billing-api",
     "pm2:monit": "pm2 monit",
+
     "docker:build": "docker build -t wifi-billing .",
     "docker:run": "docker run -p 5000:5000 --env-file .env wifi-billing",
-    "deploy": "./deploy.sh",
+
     "render:deploy": "npm run build && npm start"
   },
-  "keywords": [],
-  "author": "Denis K.",
-  "license": "ISC",
-  "description": "",
+
   "dependencies": {
     "@prisma/client": "^6.15.0",
     "axios": "^1.8.1",
@@ -38,7 +48,6 @@
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
     "mysql2": "^3.14.4",
-    "node": "^23.9.0",
     "node-fetch": "^3.3.2",
     "node-routeros": "^1.6.8",
     "pm2": "^5.3.0",
