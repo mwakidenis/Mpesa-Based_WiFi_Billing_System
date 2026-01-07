@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Register new user
 router.post("/register", async (req, res) => {
-  logger.info("Registration request received", { body: req.body });
+  logger.info("Registration request received", { body: req.body, headers: req.headers });
 
   const { username, email, phone, password } = req.body;
 
@@ -22,12 +22,12 @@ router.post("/register", async (req, res) => {
   // Validate password (6 digits, alphanumeric combo)
   const hasNumber = /\d/.test(password);
   const hasLetter = /[a-zA-Z]/.test(password);
-  const isLengthValid = password.length === 6;
+  const isLengthValid = password.length >= 6;
 
   if (!hasNumber || !hasLetter || !isLengthValid) {
     return res.status(400).json({
       success: false,
-      error: "Password must be exactly 6 characters with both numbers and letters"
+      error: "Password must be at least 6 characters with both numbers and letters"
     });
   }
 
@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
   if (!phoneRegex.test(phone)) {
     return res.status(400).json({
       success: false,
-      error: "Invalid phone number format"
+      error: "Invalid phone number format. Use format: 0712345678 or +254712345678"
     });
   }
 
@@ -95,10 +95,11 @@ router.post("/register", async (req, res) => {
       }
     });
   } catch (error) {
-    logger.error("Error creating user", { error: error.message });
+    logger.error("Error creating user", { error: error.message, stack: error.stack });
     res.status(500).json({
       success: false,
-      error: "Failed to create account"
+      error: "Failed to create account",
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });

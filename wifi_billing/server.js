@@ -29,6 +29,7 @@ const handle = nextApp.getRequestHandler();
 const PORT = process.env.PORT || 5000;
 
 // -------------------- MIDDLEWARE --------------------
+const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' })); // JSON middleware
 app.use(express.urlencoded({ extended: true })); // URL-encoded middleware
@@ -297,6 +298,7 @@ app.get("/", (req, res) => {
 
 // Prepare Next.js and start server
 nextApp.prepare().then(() => {
+  // Use the same app instance that was created earlier
   const app = express();
 
   // -------------------- MIDDLEWARE --------------------
