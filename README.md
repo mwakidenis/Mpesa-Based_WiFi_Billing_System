@@ -62,7 +62,7 @@ A comprehensive WiFi billing system that allows users to purchase internet acces
 ## ⚡ Installation & Setup
 
 ### 1. Clone Repository
-clone https://github.com/mwakidenis/Mpesa-Based_Wi-Fi_Hotspot_Billing_System.git
+git clone https://github.com/mwakidenis/Mpesa-Based_Wi-Fi_Hotspot_Billing_System.git
 cd Mpesa_Based-WiFi-Billing-System
 ```
 ### 2. Install Dependencies
