@@ -45,6 +45,21 @@ services:
       - key: LOAN_WIFI_DURATION_HOURS
         value: 1
 
+  # WiFi Billing Frontend Service
+  - type: web
+    name: wifi-billing-frontend
+    runtime: node
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_BASE_URL
+        fromService:
+          type: web
+          name: wifi-billing-api
+          property: host
+
   # PostgreSQL Database
   - type: pserv
     name: wifi-billing-db
