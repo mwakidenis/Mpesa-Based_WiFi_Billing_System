@@ -2,11 +2,11 @@
   "name": "wifi-billing-frontend",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build && next export",
-    "start": "next start"
-  },
+ "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start"
+},
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "^6.16.2",
