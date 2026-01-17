@@ -1,37 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static export for Cloudflare Pages
-  output: "export",
-
-  // Skip ESLint during build
+  experimental: {
+    appDir: true, // Enable App Router (Next.js 14+)
+  },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // Skip ESLint during build
   },
-
-  // Skip TypeScript errors during build
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // Skip TypeScript errors
   },
-
-  // Images optimization disabled (required for static export)
   images: {
-    unoptimized: true,
+    unoptimized: true, // Useful for static export
   },
-
-  // Environment variables
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-
-  // Webpack customizations
   webpack(config) {
-    // Split large chunks for better caching
     config.optimization.splitChunks = {
       chunks: "all",
       maxSize: 25 * 1024 * 1024, // 25 MB
     };
     return config;
   },
+  output: "export", // Static export for Cloudflare Pages
 };
 
 module.exports = nextConfig;
