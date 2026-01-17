@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // App Router enabled (Next.js 14+)
-  experimental: {
-    appDir: true,
-  },
+  // Static export for Cloudflare Pages
+  output: "export",
 
   // Skip ESLint during build
   eslint: {
@@ -15,7 +13,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // Images optimization disabled (useful if deploying without loader)
+  // Images optimization disabled (required for static export)
   images: {
     unoptimized: true,
   },
@@ -34,9 +32,6 @@ const nextConfig = {
     };
     return config;
   },
-
-  // Recommended for Next.js 14+ App Router deployments
-  output: "standalone", // Build as standalone for Vercel/Node.js
 };
 
 module.exports = nextConfig;
